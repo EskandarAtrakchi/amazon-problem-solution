@@ -106,3 +106,60 @@ For `memory = [3, 4, 5]`:
 - Total memory points: `5 + 9 + 12 = 26`.
 
 Thus, the output is `26`.
+
+
+```java
+import java.util.*;
+
+public class Solution {
+
+    // Custom selection sort to sort the list in descending order
+    public static void selectionSortDescending(List<Integer> memory) {
+        int n = memory.size();
+        for (int i = 0; i < n - 1; i++) {
+            int maxIdx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (memory.get(j) > memory.get(maxIdx)) {
+                    maxIdx = j;
+                }
+            }
+            // Swap the found maximum element with the current element
+            int temp = memory.get(maxIdx);
+            memory.set(maxIdx, memory.get(i));
+            memory.set(i, temp);
+        }
+    }
+
+    public static long maximizeTotalMemoryPoints(List<Integer> memory) {
+        // Sort the memory list in descending order using selection sort
+        selectionSortDescending(memory);
+
+        long totalMemoryPoints = 0;
+        long cumulativeSum = 0;
+
+        // Calculate total memory points
+        for (int mem : memory) {
+            cumulativeSum += mem;
+            totalMemoryPoints += cumulativeSum;
+        }
+
+        return totalMemoryPoints;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        List<Integer> memory = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            memory.add(scanner.nextInt());
+        }
+
+        long result = maximizeTotalMemoryPoints(memory);
+        System.out.println(result);
+
+        scanner.close();
+    }
+}
+
+```
