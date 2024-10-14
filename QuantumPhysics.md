@@ -1,4 +1,3 @@
-Here's the reformatted version of the question with the correct structure, followed by a solution:
 
 ---
 
